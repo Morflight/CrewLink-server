@@ -25,6 +25,7 @@
 * [About the Project](#about-the-project)
 * [Docker Quickstart](#docker-quickstart)
   * [Building the Docker Image](#building-the-docker-image)
+  * [Troubleshooting](#troubleshooting)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
@@ -83,6 +84,23 @@ cd crewlink-server
 2. Run the Docker build command:
 ```sh
 docker build -t ottomated/crewlink-server:build .
+```
+
+### Troubleshooting
+You can see if the server is deployed by running the following command:
+```sh
+docker ps
+```
+
+If you don't see the image ottomated/crewlink-server:latest in the list after running the command, your container may be stopped. You can recover the container id and check the logs with the following commands:
+```sh
+docker ps -a
+docker logs [containerId]
+```
+
+If you see "<error> You must set the ADDRESS environment variable.", then you need to run the following command to start the server:
+```sh
+docker run --name CrewlinkServer -e ADDRESS=http://[ip]:[port] -dp [port]:9736 ottomated/crewlink-server:latest
 ```
 
 ## Manual Installation
